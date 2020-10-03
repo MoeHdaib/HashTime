@@ -1,0 +1,90 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+
+namespace hashtime
+{
+    struct students
+    {
+        public string name;
+        public int stdID;
+
+        public students(int stdID, string name)
+        {
+            this.name = name;
+            this.stdID = stdID;
+        }
+    }
+
+    class hash
+    {
+        static Hashtable students_hash;
+        static List<students> students_list;
+
+        static Stopwatch timer;
+        static void Main(string[] args)
+        {
+            students_hash = new Hashtable();
+            students_list = new List<students>();
+            timer = new Stopwatch();
+
+            
+            Random rand_student = new Random();
+
+            for (int i=0; i < 4000000; i++)
+            {
+                students_hash.Add(i, "student" + i);
+                students m = new students(i, "student" + i);
+                students_list.Add(m);
+            }
+
+            int randSTD = -1;
+            string std_name = string.Empty; 
+
+            timer.Start();
+            float start = 0;
+            float end = 0;
+            float dif = 0;
+
+
+            int iteration = 5;
+            int j = 0; 
+
+            while (j < iteration)
+            {
+                randSTD = rand_student.Next(3000000, 4000000);
+                
+                start = timer.ElapsedMilliseconds;
+                std_name = Get_student_list(randSTD);
+                end = timer.ElapsedMilliseconds;
+                dif = end - start;
+
+                Console.WriteLine("Time taken to get: " + std_name + " from the list took " +
+                    string.Format("{0:0.##}", dif) + "millisecond");
+
+                start = timer.ElapsedMilliseconds;
+                std_name = (string)students_hash[randSTD];
+                end = timer.ElapsedMilliseconds;
+                dif = end - start;
+                
+                Console.WriteLine("Time taken to get: " + std_name + " from the hash took " +
+                    string.Format("{0:0.##}", dif) + "millisecond\n");
+
+                j++;
+            }
+        }
+
+        static string Get_student_list(int id)
+        {
+            for (int i = 0; i < students_list.Count; i++)
+            {
+                if (students_list[i].stdID == id)
+                {
+                    return students_list[i].name;
+                }
+            }
+            return string.Empty;
+        }
+    }
+}
