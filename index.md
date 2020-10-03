@@ -15,6 +15,7 @@ Syntax highlighted code block
 ## Header 2
 ### Header 3
 ![Alt text](C:\Users\moh7h\Desktop\ghkkkkkkk.png?raw=true "Title")
+<img src="C:\Users\moh7h\Desktop\ghkkkkkkk.png" alt="hi" class="inline"/>
 - Bulleted
 - List
 
