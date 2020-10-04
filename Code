@@ -32,7 +32,7 @@ namespace hashtime
             
             Random rand_student = new Random();
 
-            for (int i=0; i < 4000000; i++)
+            for (int i=0; i < 5000000; i++)
             {
                 students_hash.Add(i, "student" + i);
                 students m = new students(i, "student" + i);
@@ -53,7 +53,7 @@ namespace hashtime
 
             while (j < iteration)
             {
-                randSTD = rand_student.Next(3000000, 4000000);
+                randSTD = rand_student.Next(4000000, 5000000);
                 
                 start = timer.ElapsedMilliseconds;
                 std_name = Get_student_list(randSTD);
